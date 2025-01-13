@@ -48,7 +48,7 @@ if(formData)
   .replace('{logoIdea}',formData?.idea)
   console.log(PROMPT)
   //generate logo prompt from ai
-   let res=await fetch("http://localhost:3000/api/ai-logo-model",{
+   let res=await fetch("/api/ai-logo-model",{
     //let res=await fetch("http://localhost:3000/api/ai-logo-model/premium",{  
   method:"POST",
     headers:{

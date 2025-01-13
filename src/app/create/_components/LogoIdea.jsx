@@ -28,7 +28,7 @@ function LogoIdea({handleChange,field,formData}) {
   .replace('{logoDesc}',formData?.description)
   .replace('{logoPrompt}',formData?.design.prompt)
   console.log(PROMPT)
-  const response=await fetch('http://localhost:3000/api/ai-ideas',{
+  const response=await fetch('/api/ai-ideas',{
     method:"POST",
     body:JSON.stringify({prompt:PROMPT}),
     headers:{
