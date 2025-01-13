@@ -8,21 +8,21 @@ import LogoColorPallete from './_components/LogoColorPallete'
 import LogoIdea from './_components/LogoIdea'
 import LogoDesigns from './_components/LogoDesigns'
 //import PricingModel from './_components/PricingModel'
-
+import { Suspense } from 'react'
 function CreateLogo() {
  //   let data=React.use(params)
    // console.log(data)
    
    let [formData,setFomData]=useState({})
    const [step,setStep]=useState(1)
-   console.log(step)
+   //console.log(step)
    function handleChange(field,value)
    {
     setFomData((prev)=>{return {...prev,[field]:value}})
     
    }
    useEffect(()=>{
-   console.log(formData)
+//   console.log(formData)
    },[formData])
   return (
     <div className='mt-28 p-10   border-2 rounded-xl 2xl:mx-30'
@@ -34,7 +34,11 @@ function CreateLogo() {
     
     // }}
     >
-       {step==1&& <LogoTitle handleChange={handleChange} field="title" formData={formData}/>}
+       {step==1&& (
+  <Suspense fallback={<div>loading...</div>}>
+    <LogoTitle handleChange={handleChange} field="title" formData={formData} />
+  </Suspense>
+)}
        {step==2 && <LogoDesc handleChange={handleChange} field="description" formData={formData}  /> }
        {step==3 && <LogoColorPallete handleChange={handleChange} field="palette" formData={formData} />}
        {step==4 && <LogoDesigns handleChange={handleChange} field="design" formData={formData}/>}

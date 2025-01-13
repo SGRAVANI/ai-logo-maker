@@ -19,7 +19,7 @@ function LogoIdea({handleChange,field,formData}) {
           localStorage.setItem('formData',JSON.stringify(formData))
       }
       },[formData])
-  console.log(user)
+ // console.log(user)
   async function generateLogoDesignIdeas()
   {
   setIsLoading(true)
@@ -37,7 +37,7 @@ function LogoIdea({handleChange,field,formData}) {
 
   })
   let data=await response.json()
-   console.log(data)
+ //  console.log(data)
    setIdeas([...data.ideas,'Let AI Select the best idea'])
    
    setIsLoading(false)
@@ -57,7 +57,7 @@ function LogoIdea({handleChange,field,formData}) {
       <div className='flex flex-wrap gap-3 mt-6'>
       {ideas?.map((ele)=>{return <h2  onClick={()=>{formData[field]=ele;
         setSelectedOption(ele);
-        console.log(formData)
+       // console.log(formData)
       }} key={ele } className={`p-2 rounded-full border px-3 cursor-pointer hover:border-primary ${selectedOption==ele?'border-primary':''}`}>{ele}</h2>})}
       </div>
        

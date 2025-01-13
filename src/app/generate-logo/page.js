@@ -25,7 +25,7 @@ if(storage)
 {
   storage=JSON.parse(storage)
   setFormData(storage)
-  console.log(storage,"from generate logo")
+  //console.log(storage,"from generate logo")
 }
 }
  },[cont.userDetail])
@@ -58,17 +58,17 @@ if(formData)
   })
   let data=await res.json()
   await setLogoImage(data.image)
-  console.log(data)
+  //console.log(data)
   setLoading(false)
  setF(true)
   //generate logo image
  }
- useEffect(()=>{
-  if(logoImage)
-  {
-  console.log(logoImage)
-  }
- },[logoImage])
+//  useEffect(()=>{
+//   if(logoImage)
+//   {
+//   //console.log(logoImage)
+//   }
+//  },[logoImage])
  const handleDownload = () => {
   if (logoImage) {
     const link = document.createElement("a");
