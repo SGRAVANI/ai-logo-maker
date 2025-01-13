@@ -17,7 +17,7 @@ function StateContext({children}) {
           let body={userName:user?.fullName,
            userEmail:user?.primaryEmailAddress?.emailAddress
          }
-         let response = await fetch("http://localhost:3000/api/users",{method:"POST",
+         let response = await fetch("/api/users",{method:"POST",
            body:JSON.stringify(body),
            headers:{"Content-Type":"application/json"}
          }) 
