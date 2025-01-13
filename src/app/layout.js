@@ -36,6 +36,11 @@ export default function RootLayout({ children }) {
        <ClerkProvider>
         
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.png" type="image/png" sizes="16x16" />
+        <meta name="keywords" content="AI-based logo maker, AI logo generator, logo maker using AI, logo design with AI, automated logo generator"/>
+
+      </head>
       <body
         className={host_Grotesk.className}
       >
