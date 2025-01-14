@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button.jsx";
 import HeadingDescription from '../create/_components/HeadingDescription'
 import Image from 'next/image'
 import Link from 'next/link'
-
+import { db } from '../../../firebase.config'
+import { setDoc,doc } from 'firebase/firestore'
 //import { useUser } from '@clerk/nextjs'
 function GenerateLogoPage() {
   let cont=useContext(Context)
@@ -16,6 +17,7 @@ function GenerateLogoPage() {
   const [loading,setLoading]=useState()
   const [logoImage,setLogoImage]=useState()
   const [f,setF]=useState(false)
+  const [logoPrompt,setLogoPrompt]=useState()
   //let user=useUser()
  useEffect(()=>{
 if(typeof window!="undefined" && cont.userDetail?.email)
@@ -36,6 +38,56 @@ if(formData)
   generateAiLogo()
 }
  },[formData])
+//   async function query(data) {
+//      const response = await fetch(
+//          "https://api-inference.huggingface.co/models/strangerzonehf/Flux-Midjourney-Mix2-LoRA",
+//          {
+//              headers: {
+//                  Authorization: `Bearer ${process.env.HUGGING_FACE_API_KEY}`,
+//                  "Content-Type": "application/json",
+//              },
+//              method: "POST",
+//              body: JSON.stringify(data),
+             
+//          }
+//      );
+//      const result = await response.arrayBuffer();
+//      console.log("received")
+//      //console.log(result)
+//      return result;
+//  }
+async function query(data) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 400000); // 200 seconds
+
+  try {
+    const response = await fetch(
+      "https://api-inference.huggingface.co/models/strangerzonehf/Flux-Midjourney-Mix2-LoRA",
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_HUGGING_FACE_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+        signal: controller.signal, // Attach the AbortController
+      }
+    );
+    clearTimeout(timeout); // Clear the timeout if the request succeeds
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    return response.arrayBuffer();
+  } catch (err) {
+    if (err.name === "AbortError") {
+      console.error("The request timed out.");
+    } else {
+      console.error("Fetch error:", err);
+    }
+    throw err;
+  }
+}
+
  async function generateAiLogo()
  {
   setLoading(true)
@@ -48,7 +100,7 @@ if(formData)
   .replace('{logoIdea}',formData?.idea)
   console.log(PROMPT)
   //generate logo prompt from ai
-   let res=await fetch("/api/ai-logo-model",{
+   let res=await fetch("/api/ai-logo",{
     //let res=await fetch("http://localhost:3000/api/ai-logo-model/premium",{  
   method:"POST",
     headers:{
@@ -57,18 +109,37 @@ if(formData)
     body:JSON.stringify({prompt:PROMPT,title:formData?.title,description:formData?.description,email:cont.userDetail?.email})
   })
   let data=await res.json()
-  await setLogoImage(data.image)
-  //console.log(data)
-  setLoading(false)
- setF(true)
-  //generate logo image
+ // console.log("prompt of logo is",data.prompt)
+  
+      let img=await query(data.prompt)
+       //convert to base 64
+      const buffer=Buffer.from(img,"binary")
+         //console.log(result)
+        //generate logo from ai model
+      const base64Image=buffer.toString('base64')
+       const base64ImageWithMime=`data:image/png;base64,${base64Image}`
+//       console.log({image:base64ImageWithMime})
+     
+    try{
+      let email=cont.userDetail?.email
+      const docRef = doc(db, "users", email, "logos", Date.now().toString());
+      await setDoc(docRef, {
+        image: base64ImageWithMime,
+        title: formData?.title,
+        desc: formData?.description,
+      });
+       setLogoImage(base64ImageWithMime)
+        setLoading(false)
+        setF(true)
+
+    }
+    catch(e)
+    {
+   console.log(e)
+    }
+     
  }
-//  useEffect(()=>{
-//   if(logoImage)
-//   {
-//   //console.log(logoImage)
-//   }
-//  },[logoImage])
+
  const handleDownload = () => {
   if (logoImage) {
     const link = document.createElement("a");
