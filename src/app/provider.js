@@ -2,9 +2,6 @@
 import React, { useEffect } from 'react'
 import Header from './_Components/Header'
 
-import { useUser } from '@clerk/nextjs'
-import { useContext } from 'react'
-import { Context } from './_Context/Context'
 import StateContext from './_Context/StateContext'
 function Provider({children}) {
   //save user data

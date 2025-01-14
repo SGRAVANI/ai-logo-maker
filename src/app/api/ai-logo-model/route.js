@@ -4,6 +4,7 @@ import {
     HarmCategory,
     HarmBlockThreshold,
   } from "@google/generative-ai";
+  import axios from "axios";
 import { doc,setDoc } from "firebase/firestore";
 import { db } from "../../../../firebase.config.js";
 
@@ -45,6 +46,9 @@ import { db } from "../../../../firebase.config.js";
     //console.log(result.response.text());
     return JSON.parse(result.response.text())
   }
+
+
+  
   async function query(data) {
     const response = await fetch(
         "https://api-inference.huggingface.co/models/strangerzonehf/Flux-Midjourney-Mix2-LoRA",
