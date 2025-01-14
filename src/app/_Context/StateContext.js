@@ -22,7 +22,7 @@ function StateContext({children}) {
            headers:{"Content-Type":"application/json"}
          }) 
          let data=await response.json()
-         console.log(data,"FROM Context")
+         //console.log(data,"FROM Context")
         setUserDetail(data)
        }
   return (

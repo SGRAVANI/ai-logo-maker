@@ -68,7 +68,7 @@ function LogoIdea({handleChange,field,formData}) {
                      <Link key="link-generate-logo" href="/generate-logo">
                      <Button className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500  text-lg py-4 " >Generate Logo</Button>
                      </Link>
-                     :<SignInButton mode="modal" forceRedirectUrl="/generate-logo">
+                     :<SignInButton mode="modal" forceRedirectUrl={"/generate-logo"}  >
                      <Button  className="bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 shadow-lg hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-500  text-lg py-4 " >Generate Logo</Button>
                         </SignInButton>}
 
