@@ -1,23 +1,4 @@
-// import { NextResponse } from "next/server"
-// import { AILogoPrompt } from "../../../../aimodel"
 
-// export async function POST(request,content) {
-//     const {prompt}=await request.json()
-//     console.log("from server",prompt)
-//     try{
-//      //generate Ai Text prompt for logo
-//      const aiPromptResult=await AILogoPrompt.sendMessage(prompt)
-//      console.log(JSON.parse(await aiPromptResult.response.text()))
-//      const AiPrompt=JSON.parse(await aiPromptResult.response.text())
-//      return NextResponse.json(AiPrompt)
-//      //pass prompt to ai logo image model
-
-//     }
-//     catch(e)
-//     {
-
-//     }
-// }
 import { NextResponse } from "next/server";
 //import { AILogoDesignPrompt } from "../../../../aimodel";
 import  {
