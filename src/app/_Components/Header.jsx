@@ -14,7 +14,9 @@ function Header() {
     <header className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-lg sticky top-0 z-50">
       <div className="px-6 lg:px-20 xl:px-28 2xl:px-40 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex justify-start">
+        <div className="flex justify-start"   onClick={() => {
+            router.push("/");
+          }}>
         <Image
           
           src="/logo.svg"
@@ -22,9 +24,7 @@ function Header() {
           height={120}
           alt="logo"
           className="cursor-pointer"
-          onClick={() => {
-            router.push("/");
-          }}
+        
         />
     
           <p className="text-sm md:text-lg font-bold mx-[-100px] ">

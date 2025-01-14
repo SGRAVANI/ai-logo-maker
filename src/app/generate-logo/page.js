@@ -98,7 +98,7 @@ async function query(data) {
   .replace('{logoDesign}',formData?.design?.title)
   .replace('{logoPrompt}',formData?.design?.prompt)
   .replace('{logoIdea}',formData?.idea)
-  console.log(PROMPT)
+ // console.log(PROMPT)
   //generate logo prompt from ai
    let res=await fetch("/api/ai-logo",{
     //let res=await fetch("http://localhost:3000/api/ai-logo-model/premium",{  
