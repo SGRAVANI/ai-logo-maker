@@ -126,7 +126,7 @@ async function query(data) {
       await setDoc(docRef, {
         image: base64ImageWithMime,
         title: formData?.title,
-        desc: formData?.description,
+        desc: formData?.description?formData.description:"description not available",
       });
        setLogoImage(base64ImageWithMime)
         setLoading(false)
