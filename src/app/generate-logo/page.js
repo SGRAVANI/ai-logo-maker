@@ -126,7 +126,7 @@ async function query(data) {
       await setDoc(docRef, {
         image: base64ImageWithMime,
         title: formData?.title,
-        desc: formData?.description?formData.description:"description not available",
+        desc: formData?.description?formData.description:formData?.title,
       });
        setLogoImage(base64ImageWithMime)
         setLoading(false)
@@ -153,7 +153,7 @@ async function query(data) {
   return (
     <div className='my-10'>
       {loading &&<div>
-        <h2 className='font-medium text-xl text-gray-500 mt-[-30px]'>Do Not Refresh Page, Your Logo is being created</h2>
+        <h2 className='font-medium text-xl text-gray-500 mt-[-30px]'>Do Not Refresh Page, Your Logo is being created It will take 2 to 2.30 minutes...</h2>
         <Image src="/loading.gif" width={200} height={200} alt="loading icon" />
        
       </div>}
