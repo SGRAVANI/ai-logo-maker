@@ -22,7 +22,7 @@ function GenerateLogoPage() {
 
 useEffect(()=>{
   window.location.reload()
-})
+},[])
 
   useEffect(()=>{
 if(typeof window!="undefined" && cont.userDetail?.email)
