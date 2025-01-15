@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { db } from '../../../firebase.config'
 import { setDoc,doc } from 'firebase/firestore'
 //import { useUser } from '@clerk/nextjs'
+import { useRouter } from 'next/navigation'
 function GenerateLogoPage() {
   let cont=useContext(Context)
   const [formData,setFormData]=useState()
@@ -19,9 +20,9 @@ function GenerateLogoPage() {
   const [f,setF]=useState(false)
   const [logoPrompt,setLogoPrompt]=useState()
   //let user=useUser()
-
+  let router=useRouter()
 useEffect(()=>{
-  window.location.reload()
+ router.push("/generate-logo")
 },[])
 
   useEffect(()=>{
