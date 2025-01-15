@@ -7,6 +7,7 @@ import {
   import axios from "axios";
 import { doc,setDoc } from "firebase/firestore";
 import { db } from "../../../../firebase.config.js";
+import { useEffect } from "react";
 
   const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
   const genAI = new GoogleGenerativeAI(apiKey);
@@ -22,7 +23,7 @@ import { db } from "../../../../firebase.config.js";
     maxOutputTokens: 8192,
     responseMimeType: "application/json",
   };
-  
+
   async function run(prompt) {
     const AILogoGeneratorPrompt = model.startChat({
       generationConfig,

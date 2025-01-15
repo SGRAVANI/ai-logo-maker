@@ -19,7 +19,12 @@ function GenerateLogoPage() {
   const [f,setF]=useState(false)
   const [logoPrompt,setLogoPrompt]=useState()
   //let user=useUser()
- useEffect(()=>{
+
+useEffect(()=>{
+  window.location.reload()
+})
+
+  useEffect(()=>{
 if(typeof window!="undefined" && cont.userDetail?.email)
 {
 let storage=localStorage.getItem('formData')
